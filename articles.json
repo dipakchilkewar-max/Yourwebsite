@@ -1,20 +1,23 @@
 [
   {
     "id": 1,
-    "title": "50 Must-Know GK Facts for 2026",
-    "content": "These are important GK facts for NDA, UPSC, SSC exams. India’s capital is New Delhi. The longest river is Ganga. ISRO launched Gaganyaan mission.",
+    "title": "GK Facts 2026",
+    "content": "Important GK facts for NDA, UPSC and SSC exams...",
+    "category": "Education",
     "affiliate": "https://amzn.to/example1"
   },
   {
     "id": 2,
-    "title": "India Budget 2026 Highlights",
-    "content": "The budget focuses on education, defence, and startups. Major reforms are introduced for economic growth.",
+    "title": "Budget 2026 Highlights",
+    "content": "Complete breakdown of India Budget 2026...",
+    "category": "News",
     "affiliate": "https://amzn.to/example2"
   },
   {
     "id": 3,
-    "title": "NDA 2026 Study Plan",
-    "content": "Follow a 90-day strategy. Study daily, revise weekly, and practice mock tests regularly.",
+    "title": "Best Headphones for Singing",
+    "content": "Top headphones for music and recording...",
+    "category": "Tech",
     "affiliate": "https://amzn.to/example3"
   }
 ]
