@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Article</title>
+</head>
+<body>
+
+<h1 id="title"></h1>
+<p id="content"></p>
+
+<a href="index.html">⬅ Back</a>
+
+<script>
+const articles = {
+  1: {
+    title: "50 Must-Know GK Facts",
+    content: "Here are important GK facts for NDA, UPSC, SSC exams..."
+  },
+  2: {
+    title: "India Budget 2026",
+    content: "Complete breakdown of budget highlights..."
+  },
+  3: {
+    title: "NDA 2026 Strategy",
+    content: "Full 90-day study plan..."
+  }
+};
+
+// Get ID from URL
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+// Load article
+if(articles[id]){
+  document.getElementById("title").innerText = articles[id].title;
+  document.getElementById("content").innerText = articles[id].content;
+} else {
+  document.body.innerHTML = "<h2>Article not found</h2>";
+}
+</script>
+
+</body>
+</html>
