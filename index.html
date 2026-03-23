@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GyanPulse — AI-Powered GK, News & Exam Prep Hub</title>
+    <meta name="description" content="GyanPulse delivers daily GK, current affairs, UPSC, NDA, SSC exam prep, trending news, and educational content — AI-assisted, human-refined.">
+    <meta name="keywords" content="GK, general knowledge, current affairs, UPSC preparation, NDA exam, SSC CGL, trending news India, education blog">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"GyanPulse","url":"https://gyanpulse.in","potentialAction":{"@type":"SearchAction","target":"https://gyanpulse.in/search?q={search_term_string}","query-input":"required name=search_term_string"}}
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#f8fafc;--surface:#ffffff;--text:#0f172a;--muted:#64748b;
+            --border:rgba(99,102,241,.12);--primary:#4f46e5;--primary-light:#818cf8;
+            --secondary:#ec4899;--accent:#06b6d4;--success:#10b981;--warn:#f59e0b;
+            --card-shadow:0 1px 3px rgba(0,0,0,.06),0 6px 16px rgba(0,0,0,.04);
+            --hero-gradient:linear-gradient(135deg,#4f46e5 0%,#7c3aed 40%,#ec4899 100%);
+            --radius:1rem;--radius-sm:.65rem;
+        }
+        body.dark{
+            --bg:#020617;--surface:#0f172a;--text:#e2e8f0;--muted:#94a3b8;
+            --border:rgba(99,102,241,.25);
+            --card-shadow:0 1px 3px rgba(0,0,0,.3),0 6px 16px rgba(0,0,0,.2);
+        }
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;transition:background .35s,color .35s}
+        a{color:inherit;text-decoration:none}
+        /* ── HEADER ── */
+        .site-header{position:sticky;top:0;z-index:100;background:rgba(248,250,252,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:background .35s}
+        body.dark .site-header{background:rgba(2,6,23,.88)}
+        .hdr-inner{max-width:1220px;margin:auto;padding:.85rem 1.2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+        .logo{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.35rem;white-space:nowrap}
+        .logo i{font-style:normal;font-size:1.5rem}
+        .logo sub{font-size:.6rem;font-weight:600;background:var(--hero-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;vertical-align:super;margin-left:2px}
+        .hdr-search{flex:1;min-width:200px;position:relative}
+        .hdr-search input{width:100%;padding:.6rem 1rem .6rem 2.4rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.92rem;outline:none;transition:border .3s}
+        .hdr-search input:focus{border-color:var(--primary)}
+        .hdr-search::before{content:'🔍';position:absolute;left:.85rem;top:50%;transform:translateY(-50%);font-size:.85rem}
+        .hdr-actions{display:flex;align-items:center;gap:.5rem}
+        .btn-icon{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer;font-size:1.1rem;transition:background .2s}
+        .btn-icon:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+        /* ── NAV ── */
+        .cat-nav{max-width:1220px;margin:auto;padding:.4rem 1.2rem;overflow-x:auto;display:flex;gap:.4rem;scrollbar-width:none}
+        .cat-nav::-webkit-scrollbar{display:none}
+        .cat-chip{padding:.4rem 1rem;border-radius:999px;font-size:.82rem;font-weight:600;white-space:nowrap;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .25s}
+        .cat-chip.active,.cat-chip:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+        /* ── MAIN ── */
+        .wrap{max-width:1220px;margin:auto;padding:0 1.2rem}
+        section{margin:2.2rem 0}
+        .section-title{font-size:1.2rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+        /* ── HERO ── */
+        .hero{background:var(--hero-gradient);color:#fff;border-radius:var(--radius);padding:2.8rem 2.2rem;box-shadow:0 20px 60px rgba(79,70,229,.25);position:relative;overflow:hidden}
+        .hero::after{content:'';position:absolute;top:-50%;right:-30%;width:70%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);pointer-events:none}
+        .hero h1{font-size:2rem;font-weight:800;line-height:1.25;margin-bottom:.7rem;position:relative;z-index:1}
+        .hero p{max-width:640px;font-size:1.05rem;opacity:.92;position:relative;z-index:1}
+        .hero-stats{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.5rem;position:relative;z-index:1}
+        .hero-stat{background:rgba(255,255,255,.14);border-radius:var(--radius-sm);padding:.75rem 1rem;min-width:140px}
+        .hero-stat strong{display:block;font-size:1.3rem}
+        .hero-stat span{font-size:.8rem;opacity:.85}
+        /* ── TICKER ── */
+        .ticker{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.55rem 1rem;display:flex;align-items:center;gap:.6rem;overflow:hidden}
+        .ticker-label{background:var(--secondary);color:#fff;padding:.2rem .7rem;border-radius:999px;font-size:.72rem;font-weight:700;white-space:nowrap}
+        .ticker-track{flex:1;overflow:hidden;position:relative;height:1.4em}
+        .ticker-track span{position:absolute;white-space:nowrap;animation:ticker 28s linear infinite;font-size:.88rem}
+        @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-200%)}}
+        /* ── CARDS ── */
+        .grid{display:grid;gap:1.2rem}
+        .grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+        .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+        .grid-4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);transition:transform .25s,box-shadow .25s;cursor:pointer;display:flex;flex-direction:column}
+        .card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+        .card-cover{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,rgba(79,70,229,.12),rgba(236,72,153,.1))}
+        .card-body{padding:1.1rem 1.2rem 1.3rem;flex:1;display:flex;flex-direction:column;gap:.55rem}
+        .card-tag{align-self:flex-start;font-size:.7rem;font-weight:700;padding:.2rem .65rem;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+        .tag-gk{background:rgba(6,182,212,.15);color:#0891b2}
+        .tag-current{background:rgba(236,72,153,.12);color:#db2777}
+        .tag-education{background:rgba(245,158,11,.12);color:#d97706}
+        .tag-tech{background:rgba(79,70,229,.12);color:#6366f1}
+        .tag-business{background:rgba(16,185,129,.12);color:#059669}
+        .tag-trending{background:rgba(239,68,68,.12);color:#dc2626}
+        .card-body h3{font-size:1rem;font-weight:700;line-height:1.35}
+        .card-body p{font-size:.88rem;color:var(--muted);flex:1}
+        .card-footer{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--muted);padding-top:.5rem;border-top:1px solid var(--border)}
+        .card-link{font-size:.82rem;color:var(--primary);font-weight:600}
+        /* ── TRENDING ── */
+        .trending-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.7rem}
+        .trend-chip{padding:.8rem 1rem;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);cursor:pointer;transition:border-color .2s;display:flex;align-items:flex-start;gap:.5rem}
+        .trend-chip:hover{border-color:var(--primary)}
+        .trend-num{font-size:1.2rem;font-weight:800;color:var(--primary);line-height:1}
+        .trend-chip p{font-size:.88rem;font-weight:500}
+        /* ── AD SLOT ── */
+        .ad-slot{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:1.2rem;text-align:center;color:var(--muted);font-size:.85rem}
+        .ad-slot strong{display:block;margin-bottom:.3rem;font-size:.9rem}
+        /* ── AFFILIATE ── */
+        .aff-card{background:linear-gradient(135deg,rgba(79,70,229,.92),rgba(236,72,153,.88));color:#fff;border:none}
+        .aff-card .card-body{gap:.4rem}
+        .aff-card h3{font-size:.95rem}
+        .aff-card .price{font-size:1.15rem;font-weight:800}
+        .aff-card .commission{font-size:.75rem;opacity:.85}
+        /* ── NEWSLETTER ── */
+        .newsletter{text-align:center;padding:2.5rem 1.5rem;background:var(--hero-gradient);color:#fff;border-radius:var(--radius)}
+        .newsletter h2{font-size:1.4rem;margin-bottom:.5rem}
+        .newsletter p{margin-bottom:1.2rem;opacity:.9}
+        .newsletter form{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;max-width:480px;margin:auto}
+        .newsletter input{flex:1;min-width:200px;padding:.7rem 1rem;border-radius:999px;border:none;font-size:.95rem}
+        .newsletter button{padding:.7rem 1.8rem;border-radius:999px;border:none;background:#fff;color:var(--primary);font-weight:700;cursor:pointer}
+        /* ── AUTOMATION PANEL ── */
+        .auto-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+        .auto-card{padding:1.2rem}
+        .auto-card h4{font-size:.95rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+        .auto-card p{font-size:.85rem;color:var(--muted)}
+        .auto-card .status{display:inline-block;padding:.15rem .6rem;border-radius:999px;font-size:.7rem;font-weight:700;margin-top:.5rem}
+        .status-active{background:rgba(16,185,129,.15);color:#059669}
+        .status-pending{background:rgba(245,158,11,.15);color:#d97706}
+        /* ── CONTENT QUALITY ── */
+        .quality-bar{height:6px;border-radius:3px;background:var(--border);margin-top:.5rem;overflow:hidden}
+        .quality-fill{height:100%;border-radius:3px;transition:width .8s}
+        /* ── SCHEDULE ── */
+        .sched-list{list-style:none;display:grid;gap:.55rem}
+        .sched-list li{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface)}
+        .sched-time{font-weight:700;font-size:.85rem;min-width:75px;color:var(--primary)}
+        /* ── ADMIN ── */
+        .admin-drawer{position:fixed;top:0;right:0;width:380px;max-width:100vw;height:100vh;background:var(--surface);border-left:1px solid var(--border);transform:translateX(100%);transition:transform .35s;z-index:200;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.15)}
+        .admin-drawer.open{transform:translateX(0)}
+        .admin-hdr{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1}
+        .admin-body{padding:1.4rem}
+        .admin-body h4{margin:1.2rem 0 .5rem;font-size:.9rem;color:var(--primary)}
+        .stat-row{display:flex;justify-content:space-between;padding:.4rem 0;font-size:.9rem}
+        .stat-row strong{color:var(--secondary)}
+        .admin-btn{width:100%;padding:.65rem;border-radius:var(--radius-sm);border:none;font-weight:700;cursor:pointer;font-size:.88rem;margin-top:.4rem;transition:opacity .2s}
+        .admin-btn:hover{opacity:.85}
+        .btn-primary{background:var(--primary);color:#fff}
+        .btn-secondary{background:var(--secondary);color:#fff}
+        .btn-accent{background:var(--accent);color:#fff}
+        .btn-success{background:var(--success);color:#fff}
+        .theme-options{display:flex;gap:.5rem;margin-top:.5rem}
+        .color-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border .2s}
+        .color-dot.active{border-color:var(--text)}
+        /* ── FAB ── */
+        .fab{position:fixed;bottom:1.5rem;right:1.5rem;width:54px;height:54px;border-radius:50%;background:var(--hero-gradient);color:#fff;border:none;font-size:1.4rem;cursor:pointer;box-shadow:0 8px 24px rgba(79,70,229,.4);z-index:150;transition:transform .2s}
+        .fab:hover{transform:scale(1.1)}
+        /* ── TOAST ── */
+        .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(120px);background:var(--surface);color:var(--text);padding:.8rem 1.6rem;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:300;opacity:0;transition:all .3s;border:1px solid var(--border);font-size:.9rem}
+        .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+        /* ── FOOTER ── */
+        .site-footer{background:#020617;color:#94a3b8;padding:2.5rem 1.2rem 1.5rem;margin-top:3rem}
+        .footer-grid{max-width:1220px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+        .site-footer h4{color:#fff;margin-bottom:.6rem;font-size:.95rem}
+        .site-footer a{display:block;margin-bottom:.35rem;font-size:.88rem;transition:color .2s}
+        .site-footer a:hover{color:#fff}
+        .footer-bottom{max-width:1220px;margin:1.5rem auto 0;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08);text-align:center;font-size:.82rem}
+        /* ── RESPONSIVE ── */
+        @media(max-width:768px){
+            .hero h1{font-size:1.5rem}
+            .hero{padding:2rem 1.4rem}
+            .grid-2,.grid-3{grid-template-columns:1fr}
+        }
+        @media(max-width:480px){
+            .hdr-inner{gap:.6rem}
+            .hdr-search{order:10;width:100%}
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="hdr-inner">
+            <a href="#" class="logo"><i>⚡</i>GyanPulse<sub>AI</sub></a>
+            <div class="hdr-search"><input type="text" id="searchInput" placeholder="Search GK, exams, news..." aria-label="Search"></div>
+            <div class="hdr-actions">
+                <button class="btn-icon" id="themeBtn" title="Toggle theme">🌙</button>
+                <button class="btn-icon" id="notifBtn" title="Notifications">🔔</button>
+            </div>
+        </div>
+        <div class="cat-nav" id="catNav"></div>
+    </header>
+
+    <main class="wrap">
+        <!-- HERO -->
+        <section class="hero">
+            <h1>India's Smartest AI-Powered Knowledge Platform</h1>
+            <p>Daily GK quizzes, current affairs, UPSC · NDA · SSC exam prep, and trending news — AI-assisted content reviewed by experts for accuracy and depth.</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><strong id="dailyPosts">0</strong><span>AI posts / day</span></div>
+                <div class="hero-stat"><strong>98+</strong><span>SEO score</span></div>
+                <div class="hero-stat"><strong id="liveUsers">0</strong><span>Live readers</span></div>
+                <div class="hero-stat"><strong>< 1.8s</strong><span>Load time</span></div>
+            </div>
+        </section>
+
+        <!-- TICKER -->
+        <section>
+            <div class="ticker">
+                <span class="ticker-label">LIVE</span>
+                <div class="ticker-track">
+                    <span id="tickerText">Loading latest headlines...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- AD -->
+        <section>
+            <div class="ad-slot"><strong>📢 Google AdSense — Leaderboard 728×90</strong>Premium above-fold placement · CPM optimized</div>
+        </section>
+
+        <!-- TRENDING -->
+        <section>
+            <div class="section-title">🔥 Trending Now</div>
+            <div class="trending-grid" id="trendingGrid"></div>
+        </section>
+
+        <!-- ARTICLES -->
+        <section>
+            <div class="section-title">📰 Latest Articles</div>
+            <div class="grid grid-3" id="articleGrid"></div>
+        </section>
+
+        <!-- IN-ARTICLE AD -->
+        <section>
+            <div class="ad-slot"><strong>📢 Google AdSense — In-Article Responsive</strong>Lazy-loaded · CLS-safe · Mobile optimized</div>
+        </section>
+
+        <!-- EXAM PREP -->
+        <section>
+            <div class="section-title">🎯 Exam Prep Corner</div>
+            <div class="grid grid-3" id="examGrid"></div>
+        </section>
+
+        <!-- AFFILIATE -->
+        <section>
+            <div class="section-title">🛍️ Recommended Resources</div>
+            <div class="grid grid-4" id="affiliateGrid"></div>
+        </section>
+
+        <!-- AUTOMATION STATUS -->
+        <section>
+            <div class="section-title">🤖 AI Content Engine</div>
+            <div class="grid auto-grid" id="autoGrid"></div>
+        </section>
+
+        <!-- SCHEDULE -->
+        <section>
+            <div class="section-title">⏱️ Publishing Schedule (IST)</div>
+            <ul class="sched-list" id="schedList"></ul>
+        </section>
+
+        <!-- CONTENT QUALITY -->
+        <section>
+            <div class="section-title">✍️ Content Quality Dashboard</div>
+            <div class="grid grid-2" id="qualityGrid"></div>
+        </section>
+
+        <!-- SITEMAP -->
+        <section>
+            <div class="section-title">🗺️ SEO & Sitemap</div>
+            <div class="card" style="padding:1.2rem">
+                <button class="admin-btn btn-primary" id="sitemapBtn" style="width:auto;padding:.5rem 1.2rem">Generate XML Sitemap</button>
+                <textarea id="sitemapOutput" rows="5" style="width:100%;margin-top:.7rem;border-radius:var(--radius-sm);border:1px solid var(--border);padding:.7rem;font-family:monospace;font-size:.78rem;background:var(--bg);color:var(--text);resize:vertical"></textarea>
+                <p style="margin-top:.5rem;font-size:.82rem;color:var(--muted)">JSON-LD schema auto-injected per article · Internal linking engine active · Meta tags auto-optimized</p>
+            </div>
+        </section>
+
+        <!-- NEWSLETTER -->
+        <section class="newsletter">
+            <h2>📧 Join 25,000+ Knowledge Seekers</h2>
+            <p>Get daily GK capsules, exam tips, and curated news — zero spam, pure value.</p>
+            <form id="nlForm">
+                <input type="email" placeholder="your.email@example.com" required>
+                <button type="submit">Subscribe Free</button>
+            </form>
+        </section>
+
+        <!-- BOTTOM AD -->
+        <section>
+            <div class="ad-slot"><strong>📢 Google AdSense — Bottom Rectangle 336×280</strong>High viewability · Sticky on mobile</div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div>
+                <h4>⚡ GyanPulse</h4>
+                <p style="font-size:.88rem;line-height:1.6">India's smartest AI-powered platform for GK, current affairs, and competitive exam preparation. Human-reviewed, SEO-optimized content delivered daily.</p>
+            </div>
+            <div>
+                <h4>Categories</h4>
+                <a href="#">General Knowledge</a><a href="#">Current Affairs</a><a href="#">Education & Exams</a><a href="#">Technology</a><a href="#">Business & Finance</a><a href="#">Trending News</a>
+            </div>
+            <div>
+                <h4>Exams We Cover</h4>
+                <a href="#">UPSC / IAS</a><a href="#">NDA / CDS</a><a href="#">SSC CGL / CHSL</a><a href="#">Banking (IBPS/SBI)</a><a href="#">Railway (RRB)</a><a href="#">State PSC</a>
+            </div>
+            <div>
+                <h4>Monetization</h4>
+                <a href="#">Google AdSense</a><a href="#">Amazon Affiliate</a><a href="#">Flipkart Affiliate</a><a href="#">Sponsored Content</a>
+                <h4 style="margin-top:1rem">Legal</h4>
+                <a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">DMCA</a>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 GyanPulse · AI-Assisted · Human-Verified · Built for Scale & Revenue</div>
+    </footer>
+
+    <button class="fab" id="fabBtn" title="Admin Panel">⚙️</button>
+
+    <aside class="admin-drawer" id="adminDrawer">
+        <div class="admin-hdr"><h3>Admin Dashboard</h3><button class="btn-icon" id="closeAdmin">✕</button></div>
+        <div class="admin-body">
+            <h4>📊 Live Metrics</h4>
+            <div class="stat-row"><span>Total Articles</span><strong id="sTotalArticles">0</strong></div>
+            <div class="stat-row"><span>Monthly Views</span><strong id="sMonthlyViews">0</strong></div>
+            <div class="stat-row"><span>Monthly Revenue</span><strong id="sRevenue">₹0</strong></div>
+            <div class="stat-row"><span>Affiliate Clicks</span><strong id="sAffClicks">0</strong></div>
+            <div class="stat-row"><span>Subscribers</span><strong id="sSubs">0</strong></div>
+            <div class="stat-row"><span>Pending Approval</span><strong id="sPending">0</strong></div>
+
+            <h4>⚡ Quick Actions</h4>
+            <button class="admin-btn btn-primary" id="genArticleBtn">🤖 Generate AI Article</button>
+            <button class="admin-btn btn-success" id="approveAllBtn">✅ Approve All Pending</button>
+            <button class="admin-btn btn-secondary" id="refreshSeoBtn">🔧 Refresh SEO Suite</button>
+            <button class="admin-btn btn-accent" id="socialShareBtn">📣 Auto-Share to Social</button>
+
+            <h4>🎨 Theme Customizer</h4>
+            <div class="theme-options" id="themeColors"></div>
+            <button class="admin-btn btn-primary" style="margin-top:.8rem" id="resetThemeBtn">Reset to Default</button>
+
+            <h4>🗂️ Manage Categories</h4>
+            <div id="catManager"></div>
+            <button class="admin-btn btn-accent" style="margin-top:.6rem" id="addCatBtn">+ Add Category</button>
+
+            <h4>📝 Content Pipeline</h4>
+            <div id="pipelineList"></div>
+        </div>
+    </aside>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+    (function(){
+        // ── DATA ──
+        const CATEGORIES = [
+            {id:'all',label:'All',icon:'🌐',tag:''},
+            {id:'gk',label:'General Knowledge',icon:'🧠',tag:'tag-gk'},
+            {id:'current',label:'Current Affairs',icon:'📡',tag:'tag-current'},
+            {id:'education',label:'Education & Exams',icon:'🎓',tag:'tag-education'},
+            {id:'tech',label:'Technology',icon:'💻',tag:'tag-tech'},
+            {id:'business',label:'Business & Finance',icon:'💼',tag:'tag-business'},
+            {id:'trending',label:'Trending News',icon:'🔥',tag:'tag-trending'}
+        ];
+
+        const ARTICLES = [
+            {id:1,cat:'gk',emoji:'🌍',title:'50 Must-Know GK Facts for Every Competitive Exam in 2026',summary:'From India\'s longest river to the newest UN member state — these rapid-fire facts are tested repeatedly in UPSC, NDA, and SSC papers.',read:5,views:4820,date:'2026-03-18',related:3,keywords:['GK facts','competitive exams','India GK']},
+            {id:2,cat:'current',emoji:'🇮🇳',title:'India\'s Union Budget 2026–27: Key Highlights for Students',summary:'Tax changes, education sector funding, defence allocation, and startup incentives — everything exam aspirants need to know in one place.',read:7,views:6210,date:'2026-03-17',related:5,keywords:['Union Budget','current affairs','economy']},
+            {id:3,cat:'education',emoji:'📝',title:'NDA 2026 Exam Strategy: Complete 90-Day Study Plan',summary:'Subject-wise weightage, daily timetable, best books, and mock-test strategy built from topper interviews and previous year analysis.',read:8,views:5430,date:'2026-03-17',related:1,keywords:['NDA exam','study plan','defence exams']},
+            {id:4,cat:'tech',emoji:'🤖',title:'How India\'s AI Startups Are Reshaping EdTech in 2026',summary:'From adaptive testing to vernacular tutoring bots, a deep dive into the companies changing how India learns.',read:6,views:3150,date:'2026-03-16',related:6,keywords:['AI edtech','Indian startups','technology']},
+            {id:5,cat:'business',emoji:'📊',title:'RBI Policy Update: What the Latest Rate Decision Means for You',summary:'Impact on home loans, fixed deposits, stock markets, and government bond yields — explained in plain language with examples.',read:5,views:3870,date:'2026-03-16',related:2,keywords:['RBI policy','finance','interest rates']},
+            {id:6,cat:'trending',emoji:'🔥',title:'Viral: ISRO\'s Gaganyaan Crew Selection Sparks National Pride',summary:'Meet the four astronaut candidates and understand the science, geopolitics, and cultural significance behind India\'s human spaceflight programme.',read:5,views:8920,date:'2026-03-18',related:4,keywords:['ISRO','Gaganyaan','trending India']},
+            {id:7,cat:'education',emoji:'🎯',title:'UPSC Prelims 2026: Top 30 Expected Questions with Answers',summary:'Curated from current affairs, economic survey data, and Science & Tech developments. Each answer includes detailed explanations and source links.',read:10,views:7650,date:'2026-03-18',related:3,keywords:['UPSC prelims','expected questions','IAS']},
+            {id:8,cat:'gk',emoji:'🏛️',title:'Indian Constitution: 15 Amendments Every Student Must Know',summary:'From the 42nd (Mini Constitution) to the 101st (GST), understand the context, provisions, and exam relevance of key constitutional changes.',read:7,views:4100,date:'2026-03-15',related:7,keywords:['Indian Constitution','amendments','polity']},
+            {id:9,cat:'current',emoji:'🌏',title:'Global Affairs Digest: G20, Climate Summit & Trade Wars',summary:'A weekly wrap of international events that regularly appear in UPSC and banking exam current affairs sections.',read:6,views:2980,date:'2026-03-15',related:2,keywords:['global affairs','G20','international relations']}
+        ];
+
+        const EXAM_CONTENT = [
+            {emoji:'🎖️',title:'NDA Mathematics: Shortcut Formulas Cheat Sheet',summary:'Trigonometry, calculus, and probability shortcuts that save 15+ minutes in the actual exam.',cat:'education',read:6,views:3200},
+            {emoji:'📚',title:'SSC CGL Tier-1: English Vocabulary – 200 Repeat Words',summary:'High-frequency words from the last 5 years with mnemonics and usage examples.',cat:'education',read:8,views:4500},
+            {emoji:'🗺️',title:'UPSC Geography: Map-Based Questions Masterclass',summary:'Rivers, passes, national parks, and boundary disputes — visual learning approach with practice maps.',cat:'education',read:7,views:3800}
+        ];
+
+        const AFFILIATE = [
+            {name:'UPSC Masterclass (Unacademy)',price:'₹12,999',commission:'35%',icon:'🎓',network:'Impact'},
+            {name:'NDA Book Set (Arihant)',price:'₹1,499',commission:'8%',icon:'📚',network:'Amazon'},
+            {name:'SSC Prep Tablet',price:'₹8,999',commission:'₹800 flat',icon:'💻',network:'Flipkart'},
+            {name:'Current Affairs Yearly',price:'₹599',commission:'12%',icon:'📰',network:'Amazon'}
+        ];
+
+        const TRENDS = [
+            'Gaganyaan Crew Selection 2026','Union Budget Education Highlights','NDA 2 2026 Notification Date',
+            'UPSC CSE Prelims Cutoff Prediction','RBI Repo Rate Impact on EMI','India G20 Sherpa Track Update',
+            'AI in Government Exams','SSC CGL 2026 Syllabus Change'
+        ];
+
+        const SCHEDULE = [
+            {time:'06:00 AM',action:'AI fetches Google Trends + news API data for India'},
+            {time:'07:30 AM',action:'GK & Current Affairs articles generated & queued'},
+            {time:'09:00 AM',action:'Morning batch published after human review'},
+            {time:'12:30 PM',action:'Trending + Exam content refresh + push notification'},
+            {time:'04:00 PM',action:'Tech & Business articles drop'},
+            {time:'08:00 PM',action:'Evening GK quiz + social media auto-share'},
+            {time:'11:00 PM',action:'Evergreen content audit + internal linking pass'}
+        ];
+
+        const AUTO_FEATURES = [
+            {title:'TrendSense Fetcher',desc:'Scans Google Trends India, Twitter/X, and 15+ news APIs every 2 hours for fresh topics.',status:'active'},
+            {title:'HumanTone Rewriter',desc:'Rewrites AI drafts with varied sentence structure, opinions, examples, and regional context to pass AI detection.',status:'active'},
+            {title:'SEO Auto-Optimizer',desc:'Generates title tags, meta descriptions, OG tags, FAQ schema, and keyword density checks per article.',status:'active'},
+            {title:'Internal Link Engine',desc:'Automatically links related articles, exam guides, and GK capsules within each post.',status:'active'},
+            {title:'Semi-Auto Publisher',desc:'All AI articles land in approval queue. One-click publish after admin review.',status:'pending'},
+            {title:'Social Auto-Share',desc:'Posts to Twitter/X, Facebook, LinkedIn, and WhatsApp channels with optimized captions.',status:'active'}
+        ];
+
+        const QUALITY_METRICS = [
+            {label:'Human Tone Score',value:94,color:'#10b981'},
+            {label:'AI Detection Bypass',value:97,color:'#06b6d4'},
+            {label:'SEO Readiness',value:98,color:'#4f46e5'},
+            {label:'Readability (Flesch)',value:72,color:'#f59e0b'},
+            {label:'Internal Links / Article',value:85,color:'#ec4899'},
+            {label:'FAQ & Structure Score',value:91,color:'#8b5cf6'}
+        ];
+
+        const THEME_COLORS = [
+            {name:'Indigo',primary:'#4f46e5',secondary:'#ec4899'},
+            {name:'Emerald',primary:'#059669',secondary:'#0ea5e9'},
+            {name:'Amber',primary:'#d97706',secondary:'#dc2626'},
+            {name:'Rose',primary:'#e11d48',secondary:'#7c3aed'},
+            {name:'Cyan',primary:'#0891b2',secondary:'#8b5cf6'}
+        ];
+
+        let state = {
+            category:'all',dark:false,subs:25420,views:184500,revenue:142500,
+            affClicks:1840,pending:3,liveUsers:Math.floor(Math.random()*300)+180,
+            postsPerDay:8,logs:[]
+        };
+
+        // ── ELEMENTS ──
+        const $ = id => document.getElementById(id);
+        const catNav=$('catNav'),articleGrid=$('articleGrid'),trendingGrid=$('trendingGrid'),
+              examGrid=$('examGrid'),affiliateGrid=$('affiliateGrid'),autoGrid=$('autoGrid'),
+              schedList=$('schedList'),qualityGrid=$('qualityGrid'),toast=$('toast'),
+              adminDrawer=$('adminDrawer');
+
+        // ── RENDER ──
+        function renderCatNav(){
+            catNav.innerHTML='';
+            CATEGORIES.forEach(c=>{
+                const btn=document.createElement('button');
+                btn.className='cat-chip'+(c.id===state.category?' active':'');
+                btn.textContent=`${c.icon} ${c.label}`;
+                btn.onclick=()=>{state.category=c.id;renderCatNav();renderArticles();notify(`Showing ${c.label}`)};
+                catNav.appendChild(btn);
+            });
+        }
+
+        function renderArticles(){
+            const q=$('searchInput').value.toLowerCase();
+            const filtered=ARTICLES.filter(a=>{
+                const inCat=state.category==='all'||a.cat===state.category;
+                const match=!q||a.title.toLowerCase().includes(q)||a.summary.toLowerCase().includes(q)||a.keywords.some(k=>k.includes(q));
+                return inCat&&match;
+            });
+            articleGrid.innerHTML='';
+            if(!filtered.length){articleGrid.innerHTML='<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:2rem">No articles found. Try a different search or category.</p>';return;}
+            filtered.forEach(a=>{
+                const cat=CATEGORIES.find(c=>c.id===a.cat);
+                const card=document.createElement('div');
+                card.className='card';
+                card.innerHTML=`
+                    <div class="card-cover">${a.emoji}</div>
+                    <div class="card-body">
+                        <span class="card-tag ${cat?.tag||''}">${cat?.icon||''} ${a.cat.toUpperCase()}</span>
+                        <h3>${a.title}</h3>
+                        <p>${a.summary}</p>
+                        <div class="card-footer">
+                            <span>⏱️ ${a.read} min · 👁️ ${a.views.toLocaleString()}</span>
+                            <span class="card-link">Read →</span>
+                        </div>
+                    </div>`;
+                card.onclick=()=>{a.views++;renderArticles();notify(`Reading: ${a.title.slice(0,40)}...`)};
+                articleGrid.appendChild(card);
+            });
+        }
+
+        function renderExam(){
+            examGrid.innerHTML='';
+            EXAM_CONTENT.forEach(a=>{
+                const card=document.createElement('div');
+                card.className='card';
+                card.innerHTML=`
+                    <div class="card-cover" style="background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(236,72,153,.1))">${a.emoji}</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-education">🎓 EXAM PREP</span>
+                        <h3>${a.title}</h3>
+                        <p>${a.summary}</p>
+                        <div class="card-footer"><span>⏱️ ${a.read} min · 👁️ ${a.views.toLocaleString()}</span><span class="card-link">Study →</span></div>
+                    </div>`;
+                examGrid.appendChild(card);
+            });
+        }
+
+        function renderTrending(){
+            trendingGrid.innerHTML='';
+            TRENDS.forEach((t,i)=>{
+                const chip=document.createElement('div');
+                chip.className='trend-chip';
+                chip.innerHTML=`<span class="trend-num">${i+1}</span><p>${t}</p>`;
+                chip.onclick=()=>{$('searchInput').value=t;state.category='all';renderCatNav();renderArticles();notify(`Trending: ${t}`)};
+                trendingGrid.appendChild(chip);
+            });
+        }
+
+        function renderAffiliate(){
+            affiliateGrid.innerHTML='';
+            AFFILIATE.forEach(a=>{
+                const card=document.createElement('div');
+                card.className='card aff-card';
+                card.innerHTML=`<div class="card-body"><span style="font-size:2rem">${a.icon}</span><h3>${a.name}</h3><div class="price">${a.price}</div><div class="commission">Commission: ${a.commission} · ${a.network}</div></div>`;
+                card.onclick=()=>{state.affClicks++;updateAdmin();notify(`Affiliate click: ${a.name}`)};
+                affiliateGrid.appendChild(card);
+            });
+        }
+
+        function renderAuto(){
+            autoGrid.innerHTML='';
+            AUTO_FEATURES.forEach(f=>{
+                const card=document.createElement('div');
+                card.className='card auto-card';
+                card.innerHTML=`<h4>${f.title}</h4><p>${f.desc}</p><span class="status ${f.status==='active'?'status-active':'status-pending'}">${f.status==='active'?'✅ Active':'⏳ Pending Review'}</span>`;
+                autoGrid.appendChild(card);
+            });
+        }
+
+        function renderSchedule(){
+            schedList.innerHTML='';
+            SCHEDULE.forEach(s=>{
+                const li=document.createElement('li');
+                li.innerHTML=`<span class="sched-time">${s.time}</span><span>${s.action}</span>`;
+                schedList.appendChild(li);
+            });
+        }
+
+        function renderQuality(){
+            qualityGrid.innerHTML='';
+            QUALITY_METRICS.forEach(m=>{
+                const card=document.createElement('div');
+                card.className='card';
+                card.style.padding='1.1rem 1.2rem';
+                card.innerHTML=`<div style="display:flex;justify-content:space-between"><span style="font-weight:600;font-size:.9rem">${m.label}</span><strong style="color:${m.color}">${m.value}%</strong></div><div class="quality-bar"><div class="quality-fill" style="width:${m.value}%;background:${m.color}"></div></div>`;
+                qualityGrid.appendChild(card);
+            });
+        }
+
+        function renderThemeColors(){
+            const cont=$('themeColors');
+            cont.innerHTML='';
+            THEME_COLORS.forEach((t,i)=>{
+                const dot=document.createElement('div');
+                dot.className='color-dot';
+                dot.style.background=t.primary;
+                dot.title=t.name;
+                dot.onclick=()=>{
+                    document.documentElement.style.setProperty('--primary',t.primary);
+                    document.documentElement.style.setProperty('--secondary',t.secondary);
+                    document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('active'));
+                    dot.classList.add('active');
+                    notify(`Theme: ${t.name}`);
+                };
+                cont.appendChild(dot);
+            });
+        }
+
+        function renderCatManager(){
+            const cont=$('catManager');
+            cont.innerHTML='';
+            CATEGORIES.filter(c=>c.id!=='all').forEach((c,i)=>{
+                const row=document.createElement('div');
+                row.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;font-size:.88rem;border-bottom:1px solid var(--border)';
+                row.innerHTML=`<span>${c.icon} ${c.label}</span><button style="background:none;border:none;color:var(--secondary);cursor:pointer;font-size:.8rem" data-idx="${i}">Remove</button>`;
+                row.querySelector('button').onclick=()=>{CATEGORIES.splice(i+1,1);renderCatManager();renderCatNav();notify(`Removed: ${c.label}`)};
+                cont.appendChild(row);
+            });
+        }
+
+        function renderPipeline(){
+            const cont=$('pipelineList');
+            cont.innerHTML='';
+            state.logs.slice(0,8).forEach(l=>{
+                const row=document.createElement('div');
+                row.style.cssText='font-size:.82rem;padding:.35rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between';
+                row.innerHTML=`<span>${l.msg}</span><span style="color:var(--muted)">${l.time}</span>`;
+                cont.appendChild(row);
+            });
+        }
+
+        function updateAdmin(){
+            $('sTotalArticles').textContent=ARTICLES.length;
+            $('sMonthlyViews').textContent=state.views.toLocaleString();
+            $('sRevenue').textContent='₹'+state.revenue.toLocaleString();
+            $('sAffClicks').textContent=state.affClicks;
+            $('sSubs').textContent=state.subs.toLocaleString();
+            $('sPending').textContent=state.pending;
+            $('dailyPosts').textContent=state.postsPerDay;
+            $('liveUsers').textContent=state.liveUsers;
+        }
+
+        function updateTicker(){
+            const headlines=ARTICLES.map(a=>a.title);
+            $('tickerText').textContent=headlines.join('  ·  ');
+        }
+
+        // ── ACTIONS ──
+        function generateArticle(){
+            const trend=TRENDS[Math.floor(Math.random()*TRENDS.length)];
+            const cat=CATEGORIES.filter(c=>c.id!=='all')[Math.floor(Math.random()*6)];
+            const emojis=['📝','🧪','🏛️','📱','💡','🎯','📈','🌐','⚡','🔍'];
+            const newA={
+                id:Date.now(),cat:cat.id,emoji:emojis[Math.floor(Math.random()*emojis.length)],
+                title:`${trend}: In-Depth Analysis & Key Takeaways`,
+                summary:`AI-generated deep dive on ${trend.toLowerCase()} with expert opinions, real-world examples, FAQs, and exam-relevant points. Human-reviewed for accuracy.`,
+                read:Math.floor(Math.random()*6)+4,views:Math.floor(Math.random()*1000)+200,
+                date:new Date().toISOString().slice(0,10),related:ARTICLES[Math.floor(Math.random()*ARTICLES.length)].id,
+                keywords:trend.toLowerCase().split(' ')
+            };
+            ARTICLES.unshift(newA);
+            state.pending++;
+            state.postsPerDay=Math.min(15,state.postsPerDay+1);
+            renderArticles();updateAdmin();
+            log(`AI generated: "${newA.title}"`);
+            notify('New AI article generated & queued for approval');
+        }
+
+        function log(msg){
+            state.logs.unshift({msg,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+            if(state.logs.length>12)state.logs.pop();
+            renderPipeline();
+        }
+
+        function notify(text){
+            toast.textContent=text;
+            toast.classList.add('show');
+            setTimeout(()=>toast.classList.remove('show'),2800);
+        }
+
+        // ── EVENTS ──
+        $('themeBtn').onclick=()=>{
+            state.dark=!state.dark;
+            document.body.classList.toggle('dark',state.dark);
+            $('themeBtn').textContent=state.dark?'☀️':'🌙';
+            notify(state.dark?'Dark mode enabled':'Light mode enabled');
+        };
+
+        $('searchInput').addEventListener('input',()=>renderArticles());
+
+        $('nlForm').addEventListener('submit',e=>{
+            e.preventDefault();state.subs++;updateAdmin();
+            notify('Subscribed! Daily GK capsules incoming.');
+            e.target.reset();
+        });
+
+        $('sitemapBtn').onclick=()=>{
+            const urls=ARTICLES.map(a=>`  <url>\n    <loc>https://gyanpulse.in/${a.cat}/${a.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'')}</loc>\n    <lastmod>${a.date}</lastmod>\n    <priority>${a.cat==='current'?'0.9':'0.7'}</priority>\n  </url>`).join('\n');
+            $('sitemapOutput').value=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`;
+            notify('Sitemap regenerated');
+        };
+
+        $('fabBtn').onclick=()=>adminDrawer.classList.toggle('open');
+        $('closeAdmin').onclick=()=>adminDrawer.classList.remove('open');
+        $('genArticleBtn').onclick=generateArticle;
+        $('approveAllBtn').onclick=()=>{state.pending=0;updateAdmin();log('All pending articles approved');notify('All posts approved & published')};
+        $('refreshSeoBtn').onclick=()=>{log('SEO suite refreshed: meta, schema, sitemap, internal links');notify('SEO refreshed')};
+        $('socialShareBtn').onclick=()=>{log('Auto-shared latest 5 articles to Twitter/X, FB, LinkedIn');notify('Social auto-share triggered')};
+        $('notifBtn').onclick=()=>notify('Push notifications enabled for all subscribers');
+        $('addCatBtn').onclick=()=>{
+            const name=prompt('New category name:');
+            if(name){
+                const icons=['📌','🏷️','📂','🗂️','🎪','🧩'];
+                CATEGORIES.push({id:name.toLowerCase().replace(/\s+/g,'-'),label:name,icon:icons[Math.floor(Math.random()*icons.length)],tag:''});
+                renderCatNav();renderCatManager();notify(`Added: ${name}`);
+            }
+        };
+        $('resetThemeBtn').onclick=()=>{
+            document.documentElement.style.setProperty('--primary','#4f46e5');
+            document.documentElement.style.setProperty('--secondary','#ec4899');
+            document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('active'));
+            notify('Theme reset to default');
+        };
+
+        // ── LIVE SIM ──
+        setInterval(()=>{
+            state.liveUsers=Math.max(120,state.liveUsers+Math.floor(Math.random()*30-14));
+            state.views+=Math.floor(Math.random()*40);
+            state.revenue=Math.round(state.views*0.77);
+            ARTICLES.forEach(a=>{if(Math.random()>.5)a.views+=Math.floor(Math.random()*8)});
+            updateAdmin();
+        },4000);
+
+        setInterval(generateArticle,55000);
+        setInterval(()=>log('Evergreen content refreshed + internal links updated'),80000);
+
+        // ── INIT ──
+        renderCatNav();renderArticles();renderTrending();renderExam();
+        renderAffiliate();renderAuto();renderSchedule();renderQuality();
+        renderThemeColors();renderCatManager();renderPipeline();
+        updateAdmin();updateTicker();
+        log('GyanPulse AI engine initialized');
+        log('TrendSense fetching Google Trends India...');
+        log('SEO auto-optimizer active');
+        setTimeout(()=>notify('Welcome to GyanPulse — India\'s smartest knowledge platform'),800);
+    })();
+    </script>
+</body>
+</html>
