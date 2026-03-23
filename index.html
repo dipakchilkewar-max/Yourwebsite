@@ -465,7 +465,11 @@
                             <span class="card-link">Read →</span>
                         </div>
                     </div>`;
-                card.onclick=()=>{a.views++;renderArticles();notify(`Reading: ${a.title.slice(0,40)}...`)};
+                card.onclick = () => {
+  if(a.id === 1) window.location.href = "article1.html";
+  else if(a.id === 2) window.location.href = "article2.html";
+  else if(a.id === 3) window.location.href = "article3.html";
+};
                 articleGrid.appendChild(card);
             });
         }
