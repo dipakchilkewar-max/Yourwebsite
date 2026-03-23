@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title id="title">Article</title>
+</head>
+
+<body style="font-family:Arial;max-width:800px;margin:auto;padding:20px;">
+
+<h1 id="heading"></h1>
+<p id="content"></p>
+
+<hr>
+
+<h3>📢 Recommended</h3>
+<a id="affiliate" href="#" target="_blank">👉 Buy Recommended Product</a>
+
+<br><br>
+<a href="index.html">⬅ Back to Home</a>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+fetch("articles.json")
+.then(res => res.json())
+.then(data => {
+  const article = data.find(a => a.id == id);
+
+  if(article){
+    document.getElementById("heading").innerText = article.title;
+    document.getElementById("content").innerText = article.content;
+    document.getElementById("affiliate").href = article.affiliate;
+    document.getElementById("title").innerText = article.title;
+  } else {
+    document.body.innerHTML = "<h2>Article not found</h2>";
+  }
+});
+</script>
+
+</body>
+</html>
